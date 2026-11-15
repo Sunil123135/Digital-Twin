@@ -1,0 +1,11 @@
+---
+description: AI copilot via OpenRouter
+globs: api/pharmatwin/copilot/**
+alwaysApply: false
+---
+- Use the official openai Python SDK with base_url="https://openrouter.ai/api/v1" and api_key from OPENROUTER_API_KEY. Send HTTP-Referer (APP_URL) and X-Title ("PharmaTwin") headers.
+- Model ids only from OPENROUTER_MODEL and OPENROUTER_FALLBACK_MODELS (passed as extra_body={"models": [...]}). Never hard-code a model id.
+- Tools execute server-side and are validated with Pydantic. The copilot may only state numbers returned by tools and must cite the run id.
+- create_scenario returns a proposal; nothing runs until the user confirms in the UI.
+- Max 6 tool calls per turn, 30 s timeout per model call, log token usage. Tests mock OpenRouter; never call the real API in tests.
+- If no key is set, return a clear "copilot is off" state instead of failing.

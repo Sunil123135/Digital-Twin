@@ -1,0 +1,9 @@
+---
+description: PharmaTwin project-wide rules
+alwaysApply: true
+---
+- Read AGENTS.md. Product truth lives in PRODUCT.md, visual truth in DESIGN.md, technical spec in CURSOR_BUILD_PROMPT.md Part B.
+- Do not reopen approved product decisions; raise genuine contradictions as questions.
+- Work in small, tested steps. Write the failing test first, then the code. Run `make test` and `make lint` before claiming completion, and report real results.
+- Never commit secrets. Never fabricate data, customers or benchmarks. All demo data is synthetic.
+- Keep modules focused: engine (pure functions, no I/O), runs (orchestration), routers (HTTP), copilot (LLM). Files over ~400 lines are a signal to split.

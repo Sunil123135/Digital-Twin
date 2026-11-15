@@ -1,0 +1,11 @@
+---
+description: Python simulation engine and API rules
+globs: api/**/*.py
+alwaysApply: false
+---
+- Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2, NumPy, OR-Tools. Manage dependencies with uv.
+- engine/ modules are pure and deterministic: no database, no network, no global random state. Pass `numpy.random.Generator` seeded from the run seed.
+- Vectorise over Monte Carlo runs and SKU families; loop only over days. Keep memory under 1.5 GB.
+- Every KPI returns P10/P50/P90. Every scenario template must pass the monotonic sanity tests.
+- Type-check engine/ with mypy --strict; lint with ruff.
+- API responses use Pydantic schemas in schemas.py; regenerate the TS client after changing them.

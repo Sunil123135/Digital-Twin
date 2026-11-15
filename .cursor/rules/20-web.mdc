@@ -1,0 +1,11 @@
+---
+description: Next.js front-end and design-system rules
+globs: web/**/*.{ts,tsx,css}
+alwaysApply: false
+---
+- Next.js 15 App Router, TypeScript strict, Tailwind v4, shadcn/ui components only, theme tokens from DESIGN.md (no raw hex/oklch in components).
+- Load the impeccable skill before UI edits; this is an Operate-mode app: precision and restraint over expression.
+- Saffron (--recommended) only marks the recommended plan. Risk colours always come with a text label. Money is neutral Ink with signed arrows.
+- All numbers: tabular-nums, right-aligned in tables, formatted with lib/format.ts (₹ lakh/crore).
+- Every data view has skeleton, empty and error states. Respect prefers-reduced-motion.
+- Data fetching via TanStack Query and the generated API client; no fetch calls scattered in components.
