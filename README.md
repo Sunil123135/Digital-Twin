@@ -2,7 +2,7 @@
 
 A risk-simulation layer for pharma manufacturers and distributors. Simulate disruptions (floods, China ingredient shocks, USFDA actions, recalls, cold-chain failures, tariffs) and see the impact in **money and service** together, with recommended response plans for approval. Built to sit alongside SAP IBP, Kinaxis, o9 or Blue Yonder.
 
-**Status:** design approved; demo build not started. Data in the demo is synthetic.
+**Status:** demo build is in the repo. Data in the demo is synthetic.
 
 ## Start here
 | File | What it is |
@@ -18,3 +18,12 @@ A risk-simulation layer for pharma manufacturers and distributors. Simulate disr
 
 ## Stack
 Next.js 15 · shadcn/ui · tweakcn · Python FastAPI · NumPy · OR-Tools · SQLite (demo) · OpenRouter · Cursor
+
+## Run the demo
+1. Copy `.env.example` to `.env`. Leave `OPENROUTER_API_KEY` empty to use the app without the copilot.
+2. `make setup` then `make seed` then `make dev`. API is on port 8000, the web app on port 3000. Open `/executive`.
+3. On Windows without `make`: `python -m pip install uv`, then from `api` run `uv sync --all-groups` and `uv run python -m pharmatwin.seed`. Start the API with `uv run uvicorn pharmatwin.main:app --port 8000` and the web app with `pnpm dev` from `web`. Google Drive cannot store the symlinks those tools create. On this machine the API virtualenv is `%LOCALAPPDATA%\pharmatwin-venv` (`UV_LINK_MODE=copy`) and the web app runs from `%LOCALAPPDATA%\pharmatwin-web` after `pnpm install` there and a copy of `web\app`, `web\components`, and `web\lib`.
+4. Presenter path: Executive → Open hero scenario (Monsoon flood + dengue) → move the flood-duration slider → Run → Compare plans → Send for approval → approve with a reason. The audit tab records the decision.
+5. Deploy: web on Vercel with root directory `web` and `NEXT_PUBLIC_API_URL` pointing at the API. API on Render using `api/Dockerfile` (`PORT` is honoured). Set `DEMO_PASSWORD` to require HTTP basic auth (user `demo`). Set `OPENROUTER_API_KEY` and `OPENROUTER_MODEL` on the API only.
+
+All figures in the demo come from the synthetic network `synth-42`. They are not a real company's results.
